@@ -2,41 +2,20 @@
 
 ## server1 is wireguard1 which serves VPN for clients
 - hosts: server1
-  become: yes
   remote_user: wireguard1
   become: yes
   become_method: sudo
   connection: ssh
-  tasks:
-    - name: install wireguard
-      apt:
-        name: wireguard
-        state: present
-    - name: test wireguard is installed
-      shell: wg
-      register: wg_output
-    - name: test ok commands
-      shell: echo hello > something
-      register: nothing
-    - debug: msg="{{ wg_output['stderr_lines'] }}"
-    - debug: msg="{{ nothing['stderr_lines'] }}"
+  roles:
+    - install_wireguard
 
 
 ## server2 is connected to the lan inside
 - hosts: server2
   remote_user: wireguard2
   become: yes
-  tasks:
-    - name: install wireguard
-      apt:
-        name: wireguard
-        state: present
-    - name: test wireguard is installed
-      shell: wg
-      register: wg_output
-    - debug: msg="{{ wg_output['stderr_lines'] }}"
-    - debug: msg="Hello from {{ inventory_hostname }}!"
-
+  roles:
+    - install_wireguard
 
 # client test
 - hosts: client1

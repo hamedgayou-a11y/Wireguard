@@ -1,0 +1,22 @@
+---
+
+## server1 is wireguard1 which serves VPN for clients
+- hosts: server1
+  become: yes
+  remote_user: wireguard1
+  become: yes
+  become_method: sudo
+  connection: ssh
+  roles:
+    - monitor
+
+
+
+## server2 is connected to the lan inside
+- hosts: server2
+  remote_user: wireguard2
+  become: yes
+  roles:
+    - monitor
+
+

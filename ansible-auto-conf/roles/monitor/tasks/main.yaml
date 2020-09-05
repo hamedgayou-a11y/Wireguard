@@ -1,0 +1,9 @@
+---
+- name: show peers
+  shell: wg show
+  register: wg_output
+- name: show config
+  shell: echo hello > something
+  register: config_output
+- debug: msg="{{ wg_output }}" # or we can show only wg_output['stdout'] or stderr
+- debug: msg="{{ config_output }}"

@@ -1,0 +1,7 @@
+---
+
+- hosts: server1
+  remote_user: wireguard1
+  become: yes
+  roles:
+    - add_peer

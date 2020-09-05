@@ -1,0 +1,12 @@
+- name: install wireguard
+  apt:
+    name: wireguard
+    state: present
+- name: test wireguard is installed
+  shell: wg
+  register: wg_output
+- name: test ok commands
+  shell: echo hello > something
+  register: nothing
+- debug: msg="{{ wg_output['stderr_lines'] }}"
+- debug: msg="{{ nothing['stderr_lines'] }}"

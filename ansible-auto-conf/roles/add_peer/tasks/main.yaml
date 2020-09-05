@@ -1,0 +1,6 @@
+---
+
+- name: add peer to wireguard1 server
+  shell: echo {{ test }}
+  register: test_output
+- debug: msg="{{ test_output }}"
