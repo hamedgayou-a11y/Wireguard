@@ -8,8 +8,18 @@
   become_method: sudo
   connection: ssh
   tasks:
-    - debug: msg="Hello from {{ inventory_hostname }}!"
-    - pause:
+    - name: install wireguard
+      apt:
+        name: wireguard
+        state: present
+    - name: test wireguard is installed
+      shell: wg
+      register: wg_output
+    - name: test ok commands
+      shell: echo hello > something
+      register: nothing
+    - debug: msg="{{ wg_output['stderr_lines'] }}"
+    - debug: msg="{{ nothing['stderr_lines'] }}"
 
 
 ## server2 is connected to the lan inside
@@ -17,22 +27,33 @@
   remote_user: wireguard2
   become: yes
   tasks:
+    - name: install wireguard
+      apt:
+        name: wireguard
+        state: present
+    - name: test wireguard is installed
+      shell: wg
+      register: wg_output
+    - debug: msg="{{ wg_output['stderr_lines'] }}"
     - debug: msg="Hello from {{ inventory_hostname }}!"
-    - pause:
 
 
 # client test
 - hosts: client1
   remote_user: client
   become: yes
+  vars:
+    test: this is a test
   tasks:
     - debug: msg="Hello from {{ inventory_hostname }}!"
-    - pause:
 
 # inner servers config if needed
 - hosts: webserver
   remote_user: zerobits
   become: yes
   tasks:
-    - debug: msg="Hello from {{ inventory_hostname }}!"
-    - pause:
+    - name: touch a file in /tmp
+      file:
+        path: /tmp/ansible-task-sample
+        state: touch
+        mode: 0644
