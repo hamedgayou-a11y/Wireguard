@@ -1,0 +1,38 @@
+---
+
+## server1 is wireguard1 which serves VPN for clients
+- hosts: server1
+  become: yes
+  remote_user: wireguard1
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - debug: msg="Hello from {{ inventory_hostname }}!"
+    - pause:
+
+
+## server2 is connected to the lan inside
+- hosts: server2
+  remote_user: wireguard2
+  become: yes
+  tasks:
+    - debug: msg="Hello from {{ inventory_hostname }}!"
+    - pause:
+
+
+# client test
+- hosts: client1
+  remote_user: client
+  become: yes
+  tasks:
+    - debug: msg="Hello from {{ inventory_hostname }}!"
+    - pause:
+
+# inner servers config if needed
+- hosts: webserver
+  remote_user: zerobits
+  become: yes
+  tasks:
+    - debug: msg="Hello from {{ inventory_hostname }}!"
+    - pause:

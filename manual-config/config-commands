@@ -1,4 +1,26 @@
+##installation ##
+
+> sudo add-apt-repository ppa:wireguard/wireguard
+> sudo apt-get update # you can skip this on Ubuntu 18.04
+> sudo apt-get install wireguard
+
 ## turning on and off the tunnel ##
+
+
+## key generation ##
+
+> cd /etc/wireguard
+> umask 077
+
+
+> wg genkey > privatekey
+> wg pubkey < privatekey > publickey
+
+# or #
+
+> wg genkey | sudo tee privatekey | wg pubkey | sudo tee publickey
+
+
 
 > sudo wg-quick up interface-name
 > sudo wg-quick down interface-name
@@ -16,3 +38,6 @@
 # or we can use addconf command to append text to the config file
 
 ## for saving running config ## # be careful this will rewrite the file so all the comments will be deleted
+
+> sudo touch /etc/wireguard/interface-name
+> sudo wg-quick save interface-name
