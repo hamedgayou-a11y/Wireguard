@@ -1,0 +1,10 @@
+
+{% for peer in peers %}
+
+    [Peer]
+    PublicKey = {{ peer.pubkey }}
+    AllowedIPs = {{ peer.ip }}
+
+{% endfor %}
+
+

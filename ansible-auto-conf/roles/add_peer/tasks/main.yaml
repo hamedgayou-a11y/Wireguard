@@ -1,6 +1,6 @@
 ---
 
-- name: add peer to wireguard1 server
-  shell: echo {{ test }}
-  register: test_output
-- debug: msg="{{ test_output }}"
+- name: copy file
+  template:
+    src: ./templates/peer.yml.j2
+    dest: /tmp/wg0.conf

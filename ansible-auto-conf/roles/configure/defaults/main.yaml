@@ -1,6 +1,15 @@
 ---
 
 ## for configuring wg1
+wg1_private_ip: 192.168.6.2/24
+wg1_listening_port: 7777
+wg1_private_key: +KVuPyimDnWcwaFFy//4Z8l0EsQEBkD663VdrXhPAHg=
+wg1_wg_interface: wg0
+wg1_inner_net: ens33
+wg2_public_key: GWd8emhGYrqZmqw9sXpjBXnWM3o9QZ6GJx8ulHu2ggw=
+wg2_allowed_ips: 0.0.0.0/0
+wg2_public_ip: 172.16.12.133:7777
+
 
 
 ## for configuring wg2

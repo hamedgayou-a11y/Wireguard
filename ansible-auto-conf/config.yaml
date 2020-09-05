@@ -1,7 +1,14 @@
 ---
 
 - hosts: server1
-  remote_user: wireguard1
+  remote_user: "{{ remote_user_name }}"
+  become: yes
+  roles:
+    - configure
+
+
+- hosts: server2
+  remote_user: "{{ remote_user_name }}"
   become: yes
   roles:
     - configure

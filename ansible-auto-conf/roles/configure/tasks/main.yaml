@@ -1,3 +1,4 @@
 - template:
         src: ./templates/wg.yml.j2
-        dest: /tmp/filebeat
+        dest: /etc/wireguard/wg0.conf
+
