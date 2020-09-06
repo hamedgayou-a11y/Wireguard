@@ -2,3 +2,5 @@
         src: ./templates/wg.yml.j2
         dest: /etc/wireguard/wg0.conf
 
+- name: running services
+  shell: wg-quick up wg0

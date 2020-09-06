@@ -3,4 +3,10 @@
 - name: copy file
   template:
     src: ./templates/peer.yml.j2
-    dest: /tmp/wg0.conf
+    dest: /tmp/wg0-tmp.conf
+- name: adding to config
+  shell: wg addconf wg0 /tmp/wg0-tmp.conf
+- name: saving the config file
+  shell: wg-quick save wg0
+
+# so first we write all peers then we add them all then we save the config
