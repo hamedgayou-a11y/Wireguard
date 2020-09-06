@@ -24,6 +24,8 @@
   vars:
     test: this is a test
   tasks:
+    - name: test running with login user pass
+      shell: echo hello zerobits01 > /tmp/something
     - debug: msg="Hello from {{ inventory_hostname }}!"
 
 # inner servers config if needed
